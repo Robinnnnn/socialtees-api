@@ -2,6 +2,8 @@
 
 This script detects changes to the sad pets featured on Socialtees. Updates, if any, are sent via SMS. 
 
+<img src="https://i.imgur.com/BuAxOqp.jpg" width="400" />
+
 ## How does it work?
 A [hashing algorithm](https://en.wikipedia.org/wiki/Hash_function) is used to freeze the latest state based on desired fields; this allows us to only subscribe to relevant changes while weeding out superfluous updates (e.g. removing a period from a description field). The most recent payload is also saved to provide more color to the diff report. Both are always available in `/cache`; using the filesystem over an in-memory cache is critical to recover from app failures.
 
