@@ -1,13 +1,17 @@
+const { resolve } = require('path')
+const configLocation = resolve(__dirname, '../config')
+
 const initializeTwilioClient = ({ accSid, token }) =>
   new require('twilio')(accSid, token)
 
-const sendTextNotification = hyperlink => {
-  const twilioConfig = require('./config').twilio
+const sendTextNotification = (diffReport, hyperlink) => {
+  const twilioConfig = require(configLocation).twilio
   const twilioClient = initializeTwilioClient(twilioConfig)
   const recipients = twilioConfig.recipients
 
   for (let name in recipients) {
-    const text = `Hey ${name}! Looks like there was an update on the petfinder page. Click here to see for yourself: ${hyperlink}`
+    const updated = diffReport.join(' Also, ')
+    const text = `.\n\nHey ${name}!\n\nGuess what - ${updated}\n\n${hyperlink}`
     twilioClient.messages.create({
       body: text,
       to: recipients[name],

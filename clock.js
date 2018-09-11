@@ -1,6 +1,6 @@
 var CronJob = require('cron').CronJob;
-var { getStatus } = require('./status');
+var { getDoggieStatus } = require('./src/main');
 
-const job = new CronJob('* * * * *', getStatus);
+const job = new CronJob('* * * * *', getDoggieStatus);
 
 job.start();
